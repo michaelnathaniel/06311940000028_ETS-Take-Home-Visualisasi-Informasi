@@ -1,0 +1,118 @@
+<html>
+
+<head>
+    <title>Michael Nathaniel Dinarta - 06311940000028</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+<!-- Data yang digunakan merupakan data baru yaitu data "Monthly Gold Prices (1979-2021)" yang dapat diakses melalui https://www.kaggle.com/datasets/odins0n/monthly-gold-prices
+    Adapun penggunaan data baru karena data yang digunakan saat visualisasi dengan menggunakan Tableau merupakan data market financials saham-saham S&P 500 (tidak ada periode waktu) 
+    sedangkan chart yang digunakan mengharuskan ada periode waktu tertentu (daily,monthly, yearly)-->
+
+<body>
+    <div>
+        <canvas id="myChart"></canvas>
+    </div>
+
+    <script>
+        // Change paragraph:
+        const labels = [
+            'January',
+            'February',
+            'March',
+            'April',
+            'May',
+            'June',
+            'July',
+            'August',
+            'September',
+            'October',
+            'November',
+            'December',
+
+        ];
+
+        const data = {
+            labels: labels,
+            datasets: [
+                {
+                    label: '2016',
+                    backgroundColor: 'rgb(66, 84, 245)',
+                    borderColor: 'rgb(66, 84, 245)',
+                    data: [15315042.3, 16513081.5, 16402620.0, 16955150.9, 16557284.0, 17450409.4, 17578187.0, 17367201.3, 17259947.5, 16597056.0, 15966198.3, 15438136.4], // isi data
+                    stepped: true,
+                },
+                {
+                    label: '2017',
+                    backgroundColor: 'rgb(236, 245, 66)',
+                    borderColor: 'rgb(236, 245, 66)',
+                    data: [16193909.4, 16744679.7, 16588246.7, 16880511.4, 16865783.4, 16556086.9, 16888833.6, 17501368.5, 17282071.9, 17226408.1, 17315984.5, 17515642.5], // isi data
+                    stepped: true,
+                },
+                {
+                    label: '2018',
+                    backgroundColor: 'rgb(245, 66, 141)',
+                    borderColor: 'rgb(245, 66, 141)',
+                    data: [18008199.3, 18118458.7, 18226102.9, 18269894.3, 18137836.2, 17918947.8, 17606098.3, 17712087.8, 17691805.9, 18470276.6, 17414006.1, 18392020.0], // isi data
+                    stepped: true,
+                },
+                {
+                    label: '2019',
+                    backgroundColor: 'rgb(245, 111, 66)',
+                    borderColor: 'rgb(245, 111, 66)',
+                    data: [18489110.6, 18557141.3, 18446494.6, 18272772.2, 18490734.6, 19905647.5, 20009965.6, 21680352.6, 21083830.7, 21209204.5, 20595414.4, 21028516.9], // isi data
+                    stepped: true,
+                },
+                {
+                    label: '2020',
+                    backgroundColor: 'rgb(67, 214, 11)',
+                    borderColor: 'rgb(67, 214, 11)',
+                    data: [21632250.3, 23097324.3, 26241973.7, 25328406.3, 25256306.3, 25257309.9, 28687538.6, 28503910.8, 28077070.6, 27522057.7, 24887206.7, 26520781.4], // isi data
+                    stepped: true,
+                }
+            ]
+        };
+
+        const config = {
+            type: 'line',
+            data: data,
+            options: {
+                responsive: true,
+                interaction: {
+                    intersect: false,
+                    axis: 'x'
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: (ctx) => 'Step Monthly Indonesia Gold Prices Interpolation',
+                    }
+                },
+                animations: {
+                    y: {
+                        easing: 'easeInOutElastic',
+                        from: (ctx) => {
+                            if (ctx.type === 'data') {
+                                if (ctx.mode === 'default' && !ctx.dropped) {
+                                    ctx.dropped = true;
+                                    return 0;
+                                }
+                            }
+                        }
+                    }
+                },
+            }
+        };
+    </script>
+
+    <script>
+        const myChart = new Chart(
+            document.getElementById('myChart'),
+            config
+        );
+    </script>
+
+
+</body>
+
+</html>
